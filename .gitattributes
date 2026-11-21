@@ -1,0 +1,11 @@
+# Files executed inside Linux containers must keep LF endings.
+# A CRLF in init.sql can break psql meta-commands such as \getenv.
+*.sql   text eol=lf
+*.sh    text eol=lf
+*.yml   text eol=lf
+*.yaml  text eol=lf
+
+# PowerShell scripts run on Windows.
+*.ps1   text eol=crlf
+
+*.pem   binary

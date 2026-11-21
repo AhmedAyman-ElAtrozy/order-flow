@@ -1,0 +1,22 @@
+# Local environment: real values live here, never in git.
+.env
+.env.*
+!.env.example
+
+# Dev RS256 key pair produced by scripts/gen-keys.mjs.
+keys/
+*.pem
+
+# Editors / OS
+.idea/
+.vscode/
+*.swp
+.DS_Store
+Thumbs.db
+
+# Build output (added now so later service tasks start clean)
+node_modules/
+dist/
+target/
+bin/
+coverage/
