@@ -1,0 +1,26 @@
+# DEV-ONLY override. Opt-in:
+#   docker compose -f docker-compose.yml -f docker-compose.dev.yml up -d
+# or simply:  .\scripts\dev.ps1 up
+#
+# Why this file exists: rule 17 says only the gateway port is published. That
+# holds for docker-compose.yml. During development you also run services from
+# your IDE on the host, and they need Kafka/Postgres/Redis. This override
+# publishes those three ports, and ONLY on 127.0.0.1 (loopback). Other machines
+# on your LAN/Wi-Fi cannot reach them; "0.0.0.0" or a bare "5432:5432" would
+# expose dev databases with dev passwords to the whole network.
+#
+# Kafka: the host-side listener is EXTERNAL, advertised as localhost:9092 in
+# docker-compose.yml, so host clients get an address they can actually reach.
+
+services:
+  postgres:
+    ports:
+      # Host port is configurable: a native Windows PostgreSQL install usually
+      # already owns 5432. Inside the network it is always postgres:5432.
+      - "127.0.0.1:${POSTGRES_HOST_PORT:-5433}:5432"
+  kafka:
+    ports:
+      - "127.0.0.1:9092:9092"
+  redis:
+    ports:
+      - "127.0.0.1:6379:6379"

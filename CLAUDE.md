@@ -70,7 +70,7 @@ services/
     src/webhooks/                dispatcher + signer
 contracts/               event envelope, topics, HTTP contracts. Source of truth
 docs/                    decisions.md (ADRs), architecture notes
-docker-compose.yml  Makefile
+docker-compose.yml  scripts/ (dev.ps1)
 ```
 
 ## Contracts (exact names: do not deviate)
